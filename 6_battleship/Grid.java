@@ -74,9 +74,9 @@ public class Grid {
 
         // Check if coordinates are correct to operate
         if (positions[0] < 0 || positions[0] > this.SIZE ||
-                positions[1] < 0 || positions[1] > this.SIZE ||
+                positions[1] <= 0 || positions[1] > this.SIZE ||
                 positions[2] < 0 || positions[2] > this.SIZE ||
-                positions[3] < 0 || positions[3] > this.SIZE) {
+                positions[3] <= 0 || positions[3] > this.SIZE) {
             // Returning wrong input to exit the insertion
             return new int[]{-1, -1};
         }
@@ -92,6 +92,65 @@ public class Grid {
         }
 
         return positions;
+    }
+
+    private boolean isClearBorders(Field middle) {
+        int leftVerticalField = middle.verticalPosition - 1;
+        int rightVerticalField = middle.verticalPosition + 1;
+
+        boolean skipOutRow = false;
+        boolean skipOutCol = middle.horizontalPosition + 1 < this.SIZE;
+        if (skipOutCol) {
+            rightVerticalField--;
+        }
+        for (int i = middle.horizontalPosition - 1; i <= middle.horizontalPosition + 1; i++) {
+            if (i == -1) {
+                i = 0;
+                for (int j = leftVerticalField; j <= rightVerticalField; j++) {
+                    if (this.grid[i][j].isOccupied() || this.grid[i][j].isSpecial()) {
+                        return false;
+                    }
+                }
+            } else if (i == 8) {
+                skipOutRow = true;
+                for (int j = leftVerticalField; j <= rightVerticalField; j++) {
+                    if (this.grid[i][j].isOccupied() || this.grid[i][j].isSpecial()) {
+                        return false;
+                    }
+                }
+            } else {
+                for (int j = leftVerticalField; j <= rightVerticalField; j++) {
+                    if (this.grid[i][j].isOccupied() || this.grid[i][j].isSpecial()) {
+                        return false;
+                    }
+                }
+
+                if (skipOutRow) {
+                    i++;
+                }
+            }
+
+        }
+
+        return true;
+    }
+    private boolean checkSurrounding(Field sourcePosition, boolean horizontalPosition) {
+        // Check in horizontal orientation
+        if (horizontalPosition) {
+            // Check if any other ships won't collide with a new one
+            if (isClearBorders(sourcePosition)) {
+                // Setting the occupation zone by new field
+                System.out.println("czysto");
+            } else {
+                System.out.println("zajete");
+                return false;
+            }
+        // Check in vertical orientation
+        } else {
+
+        }
+
+        return true;
     }
 
     public boolean insert(String[] coordinates, int shipSize) {
@@ -111,17 +170,27 @@ public class Grid {
             return false;
         }
 
-        // Useless?
-        int[] insertPosition = new int[shipSize];
-
+        int control = 0;
         if (cords[0] == cords[2]) {
             for (int i = 0; i < shipSize; i++) {
-                this.grid[cords[0]][cords[1] + i].setOccupied(true);
+                if (checkSurrounding(this.grid[cords[0]][cords[1] + i], true)) {
+                    this.grid[cords[0]][cords[1] + i].setOccupied(true);
+                    control++;
+                } else {
+                    // Loading unchanged grid and throwing an error (false)
+
+                    return false;
+                }
             }
 
         } else if (cords[1] == cords[3]) {
             for (int i = 0; i < shipSize; i++) {
-                this.grid[cords[0] + i][cords[1]].setOccupied(true);
+                if (checkSurrounding(this.grid[cords[0] + i][cords[1]], false)) {
+                    this.grid[cords[0] + i][cords[1]].setOccupied(true);
+
+                } else {
+
+                }
             }
 
         } else {

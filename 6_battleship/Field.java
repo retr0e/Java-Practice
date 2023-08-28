@@ -6,7 +6,10 @@ public class Field {
     int verticalPosition;
     int horizontalPosition;
     private boolean occupied;
-    boolean special;
+
+
+    private boolean special;
+    boolean partOfTheShip;
 
     public Field(char value, int verticalPosition, int horizontalPosition, boolean occupied, boolean special) {
         this.value = value;
@@ -14,10 +17,15 @@ public class Field {
         this.horizontalPosition = horizontalPosition;
         this.occupied = occupied;
         this.special = special;
+        this.partOfTheShip = false;
     }
 
     public boolean isOccupied() {
         return occupied;
+    }
+
+    public boolean isSpecial() {
+        return special;
     }
 
     public void setOccupied(boolean occupied) {
