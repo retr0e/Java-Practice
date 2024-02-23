@@ -1,3 +1,5 @@
+package Exercise_One;
+
 import java.util.Scanner;
 
 class Grade {

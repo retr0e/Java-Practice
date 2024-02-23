@@ -1,3 +1,5 @@
+package Exercise_Two;
+
 import java.util.Scanner;
 
 class Recursion {
