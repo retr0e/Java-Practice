@@ -57,7 +57,7 @@ public class DiskCollection {
         View viewManager = new View();
 
         // Printing information about albums in collection
-        System.out.println("Nazwa | Autor | Wydawca | Data wydania | Cena");
+        System.out.println(" Id | Nazwa | Autor | Wydawca | Data wydania | Cena (zł)");
         int albumInRow = 1;
         for (DiskCD album : collection) {
             if (album != null) {

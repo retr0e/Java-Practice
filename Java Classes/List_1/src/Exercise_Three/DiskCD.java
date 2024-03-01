@@ -73,7 +73,7 @@ public class DiskCD {
         this.songs = songs;
     }
 
-    public DiskCD editAlbum() {
+    public void editAlbum() {
         Scanner scanner = new Scanner(System.in);
         View viewManager = new View();
 
@@ -90,9 +90,37 @@ public class DiskCD {
         System.out.println("************* Utwory *************");
         System.out.println("6 - Wyświetl piosenki albumu - 6");
 
-        System.out.println("7 - WYJŚCIE - 7");
+        System.out.println("Any - WYJŚCIE - Any");
 
+        int dialogDecision = scanner.nextInt();
+        scanner.nextLine();
 
-        return null;
+        switch (dialogDecision) {
+            case 1:
+                System.out.println("Podaj nową nazwe albumu");
+                this.setAlbumTitle(scanner.nextLine());
+                break;
+            case 2:
+                System.out.println("Podaj nowe nazwisko autora");
+                this.setAuthorSurname(scanner.nextLine());
+                break;
+            case 3:
+                System.out.println("Podaj nowego wydawce");
+                this.setPublisherName(scanner.nextLine());
+                break;
+            case 4:
+                System.out.println("Podaj nową date wydania");
+                this.setReleaseDate(scanner.nextLine());
+                break;
+            case 5:
+                System.out.println("Podaj nową cene");
+                this.setPrice(scanner.nextDouble());
+                break;
+            case 6:
+                // Show songs menu
+                break;
+            default:
+                break;
+        }
     }
 }
