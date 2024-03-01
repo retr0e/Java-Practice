@@ -48,6 +48,11 @@ public class DiskCollection {
     }
 
     public void printCollection() {
+        if (this.albumsAmount == 0) {
+            System.out.println("Brak albumów w kolekcji");
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
         View viewManager = new View();
 
@@ -64,10 +69,14 @@ public class DiskCollection {
         // Operation on albums
         System.out.println("\n-----------------------------------------------");
         System.out.println("Wprowadź numer albumu do szczegółowej inspekcji");
-        System.out.print("bądź 0, aby przejść do menu początkowego: ");
+        System.out.print("bądź niewystępujący numer id, aby przejść do menu początkowego: ");
 
-        int decision = scanner.nextInt();
-        System.out.println("\n");
+        int chosenAlbum = scanner.nextInt() - 1;
+        scanner.nextLine();
+
+        if (!(chosenAlbum < 0 || chosenAlbum > this.albumsAmount - 1)) {
+            this.collection[chosenAlbum].editAlbum();
+        }
 
     }
 }
