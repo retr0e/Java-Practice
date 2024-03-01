@@ -70,8 +70,4 @@ public class DiskCD {
         this.songs = songs;
     }
 
-    public DiskCD editDisk() {
-        return null;
-    }
-
 }

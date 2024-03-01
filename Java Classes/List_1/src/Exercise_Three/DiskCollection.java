@@ -42,19 +42,32 @@ public class DiskCollection {
         // Songs segment
 //        boolean songRead;
 //        System.out.println("Czy chcesz dodać utwory? (Można dodać je później)");
+
         this.collection[this.albumsAmount] = new DiskCD(title, author, publisher, release, price);
         this.albumsAmount++;
     }
 
     public void printCollection() {
+        Scanner scanner = new Scanner(System.in);
+        View viewManager = new View();
+
+        // Printing information about albums in collection
+        System.out.println("Nazwa | Autor | Wydawca | Data wydania | Cena");
+        int albumInRow = 1;
         for (DiskCD album : collection) {
             if (album != null) {
-                StringBuilder resultString = new StringBuilder();
-                resultString.append("Nazwa albumu: ");
-                resultString.append(album.getAlbumTitle());
-
-                System.out.println(resultString);
+                System.out.println(viewManager.createAlbumDescription(albumInRow, album));
+                albumInRow++;
             }
         }
+
+        // Operation on albums
+        System.out.println("\n-----------------------------------------------");
+        System.out.println("Wprowadź numer albumu do szczegółowej inspekcji");
+        System.out.print("bądź 0, aby przejść do menu początkowego: ");
+
+        int decision = scanner.nextInt();
+        System.out.println("\n");
+
     }
 }

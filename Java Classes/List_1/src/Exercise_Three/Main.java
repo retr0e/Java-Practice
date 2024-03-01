@@ -14,6 +14,7 @@ public class Main {
             System.out.println("3 - Wyjscie z programu - 3");
 
             int decision = scanner.nextInt();
+            scanner.nextLine();
 
             switch (decision) {
                 case 1:
@@ -24,11 +25,13 @@ public class Main {
                     break;
                 case 3:
                     runProgram = false;
+                    scanner.close();
                     break;
                 default:
                     System.out.println("That is not an valid option");
                     break;
             }
+
 
         }
     }
