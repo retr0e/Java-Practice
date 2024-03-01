@@ -8,6 +8,10 @@ public class DiskCD {
     private Song[] songs = new Song[10];
     private double price;
 
+    public DiskCD() {
+
+    }
+
     public DiskCD(String albumTitle, String authorSurname, String publisherName, String releaseDate, double price) {
         this.albumTitle = albumTitle;
         this.authorSurname = authorSurname;
@@ -64,6 +68,10 @@ public class DiskCD {
 
     public void setSongs(Song[] songs) {
         this.songs = songs;
+    }
+
+    public DiskCD editDisk() {
+        return null;
     }
 
 }
