@@ -8,7 +8,8 @@ public class DiskCD {
     private String authorSurname;
     private String publisherName;
     private String releaseDate;
-    private Song[] songs = new Song[10];
+    private Song[] songs;
+    private int songsAmount;
     private double price;
 
     public DiskCD() {
@@ -21,6 +22,8 @@ public class DiskCD {
         this.publisherName = publisherName;
         this.releaseDate = releaseDate;
         this.price = price;
+        this.songs = new Song[10];
+        this.songsAmount = 0;
     }
 
     /* Getters and Setters */
@@ -65,14 +68,6 @@ public class DiskCD {
         this.price = price;
     }
 
-    public Song[] getSongs() {
-        return songs;
-    }
-
-    public void setSongs(Song[] songs) {
-        this.songs = songs;
-    }
-
     public void editAlbum() {
         Scanner scanner = new Scanner(System.in);
         View viewManager = new View();
@@ -115,12 +110,75 @@ public class DiskCD {
             case 5:
                 System.out.println("Podaj nową cene");
                 this.setPrice(scanner.nextDouble());
+                scanner.nextLine();
                 break;
             case 6:
                 // Show songs menu
+                this.albumSongsDialog();
                 break;
             default:
                 break;
         }
+    }
+
+    private void albumSongsDialog() {
+        Scanner scanner = new Scanner(System.in);
+        View viewManager = new View();
+
+        int i = 1;
+        for (Song song : this.songs) {
+            if (song != null) {
+                viewManager.createSongDescription(i, song);
+                i++;
+            }
+        }
+
+        System.out.println("******* Menu Piosenek *******");
+        System.out.println("1 - Edytuj piosenke - 1");
+        System.out.println("2 - Dodaj piosenke - 2");
+        System.out.println("3 - Wyjscie - 3");
+
+        int decision = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (decision) {
+            case 1:
+                // Edit Song
+                break;
+            case 2:
+                // Add Song
+                this.addSong();
+                break;
+            case 3:
+                return;
+            default:
+                break;
+        }
+    }
+
+    private void addSong() {
+
+        if (this.songsAmount == 10) {
+            System.out.println("Osiągnięto limit piosenek");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Song author
+        System.out.println("Podaj autora utworu");
+        String author = scanner.nextLine();
+
+        // Executor of the song
+        System.out.println("Podaj wykonawce utworu");
+        String executor = scanner.nextLine();
+
+        // Duration
+        System.out.println("Podaj czas trwania utworu");
+        double duration = scanner.nextDouble();
+        scanner.nextLine();
+
+        this.songs[this.songsAmount] = new Song(author, executor, duration);
+        this.songsAmount++;
     }
 }

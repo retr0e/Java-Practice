@@ -12,6 +12,12 @@ public class DiskCollection {
     }
 
     public void addAlbumToCollection() {
+
+        if (this.albumsAmount == 10) {
+            System.out.println("Osiągnięto maksymalną ilość albumów");
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
 
         // Title segment

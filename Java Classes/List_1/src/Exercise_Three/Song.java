@@ -3,9 +3,9 @@ package Exercise_Three;
 class Song {
     private String songAuthor;
     private String authors;
-    private String duration;
+    private double duration;
 
-    public Song(String songAuthor, String authors, String duration) {
+    public Song(String songAuthor, String authors, double duration) {
         this.songAuthor = songAuthor;
         this.authors = authors;
         this.duration = duration;
@@ -29,13 +29,15 @@ class Song {
         this.authors = authors;
     }
 
-    public String getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 
+    public void editSong() {
 
+    }
 }
