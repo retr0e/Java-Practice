@@ -125,17 +125,23 @@ public class DiskCD {
         Scanner scanner = new Scanner(System.in);
         View viewManager = new View();
 
-        System.out.println(" Id | Nazwa | Czas trwania | Wykonawca");
-        int i = 1;
-        for (Song song : this.songs) {
-            if (song != null) {
-                System.out.println(viewManager.createSongDescription(i, song));
-                i++;
+        if (this.songsAmount != 0) {
+            System.out.println(" Id | Nazwa | Czas trwania | Wykonawca");
+            int i = 1;
+            for (Song song : this.songs) {
+                if (song != null) {
+                    System.out.println(viewManager.createSongDescription(i, song));
+                    i++;
+                }
             }
+        } else {
+            System.out.println("Album nie posiada żadnych piosenek!");
         }
 
         System.out.println("\n******* Menu Piosenek *******");
-        System.out.println("Podaj Id piosenki aby ją edytować!");
+        if (this.songsAmount != 0) {
+            System.out.println("Podaj Id piosenki aby ją edytować!");
+        }
         System.out.println("11 - Dodaj piosenke - 11");
         System.out.println("Any - Wyjscie - Any");
 
@@ -144,7 +150,7 @@ public class DiskCD {
 
         if (!(chosenSong < 0 || chosenSong > this.songsAmount - 1)) {
             this.songs[chosenSong].editSong();
-        } else if (chosenSong == 11) {
+        } else if (chosenSong == 10) {
             addSong();
         }
 
@@ -169,8 +175,7 @@ public class DiskCD {
 
         // Duration
         System.out.println("Podaj czas trwania utworu");
-        double duration = scanner.nextDouble();
-        scanner.nextLine();
+        String duration = scanner.nextLine();
 
         this.songs[this.songsAmount] = new Song(author, executor, duration);
         this.songsAmount++;

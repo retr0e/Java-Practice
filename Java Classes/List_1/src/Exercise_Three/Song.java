@@ -5,9 +5,9 @@ import java.util.Scanner;
 class Song {
     private String songAuthor;
     private String authors;
-    private double duration;
+    private String duration;
 
-    public Song(String songAuthor, String authors, double duration) {
+    public Song(String songAuthor, String authors, String duration) {
         this.songAuthor = songAuthor;
         this.authors = authors;
         this.duration = duration;
@@ -31,11 +31,11 @@ class Song {
         this.authors = authors;
     }
 
-    public double getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -67,7 +67,7 @@ class Song {
                 break;
             case 3:
                 System.out.println("Podaj nowy czas trwania utworu");
-                this.setDuration(scanner.nextDouble());
+                this.setDuration(scanner.nextLine());
                 break;
 
         }
