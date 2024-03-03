@@ -1,7 +1,5 @@
 package Exercise_Three;
 
-import java.util.Scanner;
-
 class Song {
     private String songAuthor;
     private String authors;
@@ -40,7 +38,7 @@ class Song {
     }
 
     public void editSong() {
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
         View viewManager = new View();
 
         System.out.println("Wybrana piosenka:");
@@ -53,21 +51,20 @@ class Song {
 
         System.out.println("\n Any - WYJŚCIE - Any");
 
-        int editionDecision = scanner.nextInt();
-        scanner.nextLine();
+        int editionDecision = collect.getIntValue();
 
         switch (editionDecision) {
             case 1:
                 System.out.println("Podaj nowego autora piosenki");
-                this.setSongAuthor(scanner.nextLine());
+                this.setSongAuthor(collect.getStringValue());
                 break;
             case 2:
                 System.out.println("Podaj nowego wykonawce piosenki");
-                this.setAuthors(scanner.nextLine());
+                this.setAuthors(collect.getStringValue());
                 break;
             case 3:
                 System.out.println("Podaj nowy czas trwania utworu");
-                this.setDuration(scanner.nextLine());
+                this.setDuration(collect.getStringValue());
                 break;
 
         }

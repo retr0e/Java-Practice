@@ -1,7 +1,5 @@
 package Exercise_Three;
 
-import java.util.Scanner;
-
 public class DiskCollection {
     private int albumsAmount;
     private DiskCD[] collection;
@@ -18,36 +16,32 @@ public class DiskCollection {
             return;
         }
 
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
 
         // Title segment
         String title;
         System.out.println("Podaj tytuł albumu");
-        title = scanner.nextLine();
+        title = collect.getStringValue();
 
         // Author segment
         String author;
         System.out.println("Podaj nazwisko autora");
-        author = scanner.nextLine();
+        author = collect.getStringValue();
 
         // Publisher segment
         String publisher;
         System.out.println("Podaj nazwe producenta");
-        publisher = scanner.nextLine();
+        publisher = collect.getStringValue();
 
         // Release segment
         String release;
         System.out.println("Podaj date wydania");
-        release = scanner.nextLine();
+        release = collect.getStringValue();
 
         // Price segment
         double price;
         System.out.println("Podaj cene albumu");
-        price = scanner.nextDouble();
-
-        // Songs segment
-//        boolean songRead;
-//        System.out.println("Czy chcesz dodać utwory? (Można dodać je później)");
+        price = collect.getDoubleValue();
 
         this.collection[this.albumsAmount] = new DiskCD(title, author, publisher, release, price);
         this.albumsAmount++;
@@ -59,7 +53,7 @@ public class DiskCollection {
             return;
         }
 
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
         View viewManager = new View();
 
         // Printing information about albums in collection
@@ -77,8 +71,7 @@ public class DiskCollection {
         System.out.println("Wprowadź numer albumu do szczegółowej inspekcji");
         System.out.print("bądź niewystępujący numer id, aby przejść do menu początkowego: ");
 
-        int chosenAlbum = scanner.nextInt() - 1;
-        scanner.nextLine();
+        int chosenAlbum = collect.getIntValue() - 1;
 
         if (!(chosenAlbum < 0 || chosenAlbum > this.albumsAmount - 1)) {
             this.collection[chosenAlbum].editAlbum();

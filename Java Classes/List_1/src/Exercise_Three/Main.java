@@ -1,11 +1,10 @@
 package Exercise_Three;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         DiskCollection collection = new DiskCollection();
+        DataCollector collect = new DataCollector();
         boolean runProgram = true;
-        Scanner scanner = new Scanner(System.in);
 
         while (runProgram) {
             System.out.println("******** MENU ********");
@@ -13,8 +12,7 @@ public class Main {
             System.out.println("2 - Dodaj album do kolekcji - 2");
             System.out.println("3 - Wyjscie z programu - 3");
 
-            int decision = scanner.nextInt();
-            scanner.nextLine();
+            int decision = collect.getIntValue();
 
             switch (decision) {
                 case 1:
@@ -25,7 +23,7 @@ public class Main {
                     break;
                 case 3:
                     runProgram = false;
-                    scanner.close();
+                    collect.closeScanner();
                     break;
                 default:
                     System.out.println("That is not an valid option");

@@ -1,6 +1,5 @@
 package Exercise_Three;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class DiskCD {
@@ -69,7 +68,7 @@ public class DiskCD {
     }
 
     public void editAlbum() {
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
         View viewManager = new View();
 
         System.out.println("Wybrany album:");
@@ -87,30 +86,28 @@ public class DiskCD {
 
         System.out.println("\nAny - WYJŚCIE - Any");
 
-        int dialogDecision = scanner.nextInt();
-        scanner.nextLine();
+        int dialogDecision = collect.getIntValue();
 
         switch (dialogDecision) {
             case 1:
                 System.out.println("Podaj nową nazwe albumu");
-                this.setAlbumTitle(scanner.nextLine());
+                this.setAlbumTitle(collect.getStringValue());
                 break;
             case 2:
                 System.out.println("Podaj nowe nazwisko autora");
-                this.setAuthorSurname(scanner.nextLine());
+                this.setAuthorSurname(collect.getStringValue());
                 break;
             case 3:
                 System.out.println("Podaj nowego wydawce");
-                this.setPublisherName(scanner.nextLine());
+                this.setPublisherName(collect.getStringValue());
                 break;
             case 4:
                 System.out.println("Podaj nową date wydania");
-                this.setReleaseDate(scanner.nextLine());
+                this.setReleaseDate(collect.getStringValue());
                 break;
             case 5:
                 System.out.println("Podaj nową cene");
-                this.setPrice(scanner.nextDouble());
-                scanner.nextLine();
+                this.setPrice(collect.getDoubleValue());
                 break;
             case 6:
                 // Show songs menu
@@ -122,7 +119,7 @@ public class DiskCD {
     }
 
     private void albumSongsDialog() {
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
         View viewManager = new View();
 
         if (this.songsAmount != 0) {
@@ -145,8 +142,7 @@ public class DiskCD {
         System.out.println("11 - Dodaj piosenke - 11");
         System.out.println("Any - Wyjscie - Any");
 
-        int chosenSong = scanner.nextInt() - 1;
-        scanner.nextLine();
+        int chosenSong = collect.getIntValue() - 1;
 
         if (!(chosenSong < 0 || chosenSong > this.songsAmount - 1)) {
             this.songs[chosenSong].editSong();
@@ -163,19 +159,19 @@ public class DiskCD {
             return;
         }
 
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
 
         // Song author
         System.out.println("Podaj autora utworu");
-        String author = scanner.nextLine();
+        String author = collect.getStringValue();
 
         // Executor of the song
         System.out.println("Podaj wykonawce utworu");
-        String executor = scanner.nextLine();
+        String executor = collect.getStringValue();
 
         // Duration
         System.out.println("Podaj czas trwania utworu");
-        String duration = scanner.nextLine();
+        String duration = collect.getStringValue();
 
         this.songs[this.songsAmount] = new Song(author, executor, duration);
         this.songsAmount++;
