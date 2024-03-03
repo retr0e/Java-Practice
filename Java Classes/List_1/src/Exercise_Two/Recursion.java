@@ -1,15 +1,19 @@
 package Exercise_Two;
 
-import java.util.Scanner;
+import Exercise_Three.DataCollector;
 
 class Recursion {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        DataCollector collect = new DataCollector();
+
         System.out.println("Podaj liczbe n: ");
-        int n = scanner.nextInt();
+        int n = collect.getIntValue();
+
         System.out.println(factorial(n));
         System.out.println(factorialDivision(n));
+
+        collect.closeScanner();
     }
 
     private static double factorialDivision(int number) {
