@@ -85,7 +85,7 @@ public class DiskCD {
         System.out.println("************* Utwory *************");
         System.out.println("6 - Wyświetl piosenki albumu - 6");
 
-        System.out.println("Any - WYJŚCIE - Any");
+        System.out.println("\nAny - WYJŚCIE - Any");
 
         int dialogDecision = scanner.nextInt();
         scanner.nextLine();
@@ -125,35 +125,29 @@ public class DiskCD {
         Scanner scanner = new Scanner(System.in);
         View viewManager = new View();
 
+        System.out.println(" Id | Nazwa | Czas trwania | Wykonawca");
         int i = 1;
         for (Song song : this.songs) {
             if (song != null) {
-                viewManager.createSongDescription(i, song);
+                System.out.println(viewManager.createSongDescription(i, song));
                 i++;
             }
         }
 
-        System.out.println("******* Menu Piosenek *******");
-        System.out.println("1 - Edytuj piosenke - 1");
-        System.out.println("2 - Dodaj piosenke - 2");
-        System.out.println("3 - Wyjscie - 3");
+        System.out.println("\n******* Menu Piosenek *******");
+        System.out.println("Podaj Id piosenki aby ją edytować!");
+        System.out.println("11 - Dodaj piosenke - 11");
+        System.out.println("Any - Wyjscie - Any");
 
-        int decision = scanner.nextInt();
+        int chosenSong = scanner.nextInt() - 1;
         scanner.nextLine();
 
-        switch (decision) {
-            case 1:
-                // Edit Song
-                break;
-            case 2:
-                // Add Song
-                this.addSong();
-                break;
-            case 3:
-                return;
-            default:
-                break;
+        if (!(chosenSong < 0 || chosenSong > this.songsAmount - 1)) {
+            this.songs[chosenSong].editSong();
+        } else if (chosenSong == 11) {
+            addSong();
         }
+
     }
 
     private void addSong() {
